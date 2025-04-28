@@ -1,21 +1,21 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; 
 
 const Register = () => {
   const [form, setForm] = useState({ name: '', email: '', password: '', role: 'Tester' });
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post('http://localhost:5000/api/auth/register', form);
       alert('User registered successfully');
+      navigate('/'); 
     } catch (err) {
       alert('Registration failed');
     }
   };
-// After successful registration
-onRegisterSuccess(); // passed from App.jsx
-navigate('/');
 
   return (
     <div className="container mt-5">
@@ -36,4 +36,3 @@ navigate('/');
 };
 
 export default Register;
-
